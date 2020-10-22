@@ -1,6 +1,9 @@
 module.exports = (mongoose) => {
   const questionSchema = new mongoose.Schema({
-    name: String
+    description: String,
+    answer: [String],
+    like: Number,
+    dislike: Number
   });
 
   const questionModel = mongoose.model('question', questionSchema);
@@ -25,7 +28,7 @@ module.exports = (mongoose) => {
 
 
   async function createQuestion(text) {
-      let question = new questionModel({description: text, answer: String, like: Number, dislike: Number});
+      let question = new questionModel({description: text});
       return question.save();
   }
 
@@ -37,7 +40,7 @@ module.exports = (mongoose) => {
       if (l === 0) {
         let promises = [];
         for (let i = 0; i < count; i++) {
-          let newQuestion = new questionModel({description: `This is question number ${i}`, answer: `Det her er et svar`, like: 1, dislike: 2});
+          let newQuestion = new questionModel({description: `This is question number ${i}`, answer: ["Det her er et svar", "Det her er et andet svar"], like: 1, dislike: 2});
           promises.push(newQuestion.save());
         }
         return Promise.all(promises);
