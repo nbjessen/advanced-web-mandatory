@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import questionDB from '../../server/src/questionDB';
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
       <h1>Mandatory App!</h1>
       <p>Data from server:</p> 
       {data.map(qustion => {
-        return <p key={qustion._id}>{qustion.description}, {qustion.answer}, {qustion.like}, {question.dislike} ({qustion._id})</p>;
+        return <p key={qustion._id}>{qustion.description} ({qustion._id})</p>;
       })}
     </>
   );
