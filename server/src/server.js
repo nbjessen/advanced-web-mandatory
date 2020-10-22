@@ -17,11 +17,11 @@ async function createServer() {
   await mongoose.connect(MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
   // Create data
-  const qustionDB = require('./questionDB')(mongoose);
-  await qustionDB.bootstrap();
+  const questionDB = require('./questionDB')(mongoose);
+  await questionDB.bootstrap();
   
   // Require routes
-  const routes = require("./routes")(qustionDB); // Inject mongoose into routes module
+  const routes = require("./routes")(questionDB); // Inject mongoose into routes module
 
   // Add middleware
   app.use(bodyParser.json()); 

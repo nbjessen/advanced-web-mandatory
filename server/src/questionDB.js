@@ -32,6 +32,12 @@ module.exports = (mongoose) => {
       return question.save();
   }
 
+  //async function createAnswer(text) {
+    //Få fat i ID fra spørgsmål
+    // let answer = question({answer: text});
+    //return answer.save();
+  //}
+
   //Hvis der ikke er noge spørgsmål, lav 10 nye
   async function bootstrap(count = 10) {
       let l = (await getQuestions()).length;
