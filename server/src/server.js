@@ -10,18 +10,18 @@ const mongoose = require('mongoose');
 
 /**** Configuration ****/
 const app = express();
-const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/kittens'; 
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/qustions'; 
 
 async function createServer() {
   // Connect db
   await mongoose.connect(MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
   // Create data
-  const kittenDB = require('./kittenDB')(mongoose);
-  await kittenDB.bootstrap();
+  const qustionDB = require('./qustionDB')(mongoose);
+  await qustionDB.bootstrap();
   
   // Require routes
-  const routes = require("./routes")(kittenDB); // Inject mongoose into routes module
+  const routes = require("./routes")(qustionDB); // Inject mongoose into routes module
 
   // Add middleware
   app.use(bodyParser.json()); 
@@ -31,7 +31,7 @@ async function createServer() {
   app.use(express.static(path.resolve('..', 'client', 'build'))); 
   
   // Add routes
-  app.use("/api/kittens", routes);
+  app.use("/api/qustions", routes);
 
   // "Redirect" all non-API GET requests to React's entry point (index.html)
   app.get('*', (req, res) =>
