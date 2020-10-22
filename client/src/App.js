@@ -20,8 +20,8 @@ function App() {
       <p>Data from server:</p> 
       {data.map(question => {
         return <p key={question._id}>{question.description}, {question.answer}, {question.like}, {question.dislike}, ({question._id})</p>;
-      })}
-    </>
+      })} 
+    </> 
   );
 }
 

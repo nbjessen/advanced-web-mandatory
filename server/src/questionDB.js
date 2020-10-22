@@ -1,7 +1,7 @@
 module.exports = (mongoose) => {
   const questionSchema = new mongoose.Schema({
     description: String,
-    answer: [String],
+    answer: [String, Number, Number],
     like: Number,
     dislike: Number
   });
