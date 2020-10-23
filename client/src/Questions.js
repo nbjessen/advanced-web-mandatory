@@ -6,7 +6,7 @@ function Questions(props) {
   let questions = props.questions;
 
   const mapFunction = question => 
-    <Link to={`/question/${question.id}`} key={question.id}>
+    <Link to={`/question/${question._id}`} key={question._id}>
       <li>{question.title}</li>
     </Link>;
 
