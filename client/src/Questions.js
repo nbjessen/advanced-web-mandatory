@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "@reach/router";
+import AddQuestion from './AddQuestion';
 
 
 function Questions(props) {
@@ -19,6 +20,7 @@ function Questions(props) {
         {list}
       </ul>
 
+      <AddQuestion addQuestion={props.addQuestion}></AddQuestion>
     </>
   );
 }
