@@ -12,7 +12,7 @@ function Questions(props) {
     </Link>;
 
   const list = questions.map(mapFunction);
-
+  console.log(list)
   return (
     <>
       <h3>Questions</h3>

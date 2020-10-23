@@ -13,7 +13,7 @@ module.exports = (questionDB) => {
     res.json(question);
   });
 
-  router.post('/questions', async (req, res) => {
+  router.post('/', async (req, res) => {
     const { question } = request.body;
       data.push(question);
       response.json({msg: 'Recipe has been saved!'})

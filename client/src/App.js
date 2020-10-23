@@ -31,7 +31,7 @@ function App() {
 
     const newQuestion = {
       title: title,
-      description: description
+      description: description,
     }   
 
     const url = `${API_URL}/questions`;
