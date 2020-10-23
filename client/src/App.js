@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+import {Router} from "@reach/router";
+import Questions from './Questions';
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
@@ -14,8 +16,14 @@ function App() {
     getData();
   }, []); 
 
+
   return (
     <>
+      <Router>
+        <Questions path="/" questions={data}/>
+      </Router>
+
+
       <h1>Mandatory App!</h1>
       <p>Data from server:</p> 
       {data.map(question => {
