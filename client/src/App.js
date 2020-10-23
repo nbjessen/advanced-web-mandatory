@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Router} from "@reach/router";
 import Questions from './Questions';
+import Question from './Question';
 const API_URL = process.env.REACT_APP_API;
 
 function App() {
@@ -17,10 +18,20 @@ function App() {
   }, []); 
 
 
+
+  //TODO
+  function getQuestion(id){
+    console.log(data);
+    const question = data.find(element => element._id === id);
+    return question;
+  }
+
+
   return (
     <>
       <Router>
         <Questions path="/" questions={data}/>
+        <Question path="/question/:id" getQuestion={getQuestion}/>
       </Router>
 
 
@@ -28,6 +39,7 @@ function App() {
       <p>Data from server:</p> 
       {data.map(question => {
         return <p key={question._id}>{question.title}, {question.description}, {question.answer}, ({question._id})</p>;
+        
       })} 
     </> 
   );
