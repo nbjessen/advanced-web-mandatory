@@ -26,37 +26,16 @@ module.exports = (mongoose) => {
     }
 
 
-  async function createQuestion(text) {
-      let question = new questionModel({description: text});
+  async function createQuestion(title, description) {
+      let question = new questionModel({title: title, description: description});
       return question.save();
   }
 
-  //async function createAnswer(text) {
-    //Få fat i ID fra spørgsmål
-    // let answer = question({answer: text});
-    //return answer.save();
-  //}
-
-  //Hvis der ikke er noge spørgsmål, lav 10 nye
-  async function bootstrap(count = 10) {
-      let l = (await getQuestions()).length;
-      console.log("Question collection size:", l);
-  
-      if (l === 0) {
-        let promises = [];
-        for (let i = 0; i < count; i++) {
-          let newQuestion = new questionModel({title: "Question Title", description: `This is question number ${i}`, answer: [["Det her er et svar", 2, 3], ["Det her er et andet svar", 3, 2]]});
-          promises.push(newQuestion.save());
-        }
-        return Promise.all(promises);
-      }
-  }
 
   return {
   getQuestions,
   getQuestion,
-  createQuestion,
-  bootstrap
+  createQuestion
   }
 
 }

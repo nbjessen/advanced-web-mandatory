@@ -42,6 +42,7 @@ function App() {
       },
       body: JSON.stringify(newQuestion),
     });
+    
     const data = await response.json();
     console.log(data);
   }
@@ -54,14 +55,11 @@ function App() {
       </Router>
 
 
-      <h1>Mandatory App!</h1>
-      <p>Data from server:</p> 
-      {data.map(question => {
-        return <p key={question._id}>{question.title}, {question.description}, {question.answer}, ({question._id})</p>;
-        
-      })} 
+      
     </> 
   );
 }
 
 export default App;
+
+

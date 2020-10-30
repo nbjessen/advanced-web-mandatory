@@ -3,7 +3,7 @@ module.exports = (questionDB) => {
   const router = express.Router();
 
   /**** Routes ****/
-  router.get('/', async (req, res) => {
+  router.get('/questions', async (req, res) => {
     const questions = await questionDB.getQuestions(); 
     res.json(questions);
   });
@@ -13,10 +13,11 @@ module.exports = (questionDB) => {
     res.json(question);
   });
 
-  router.post('/', async (req, res) => {
-    const { question } = request.body;
-      data.push(question);
-      response.json({msg: 'Recipe has been saved!'})
+  router.post('/questions', async (req, res) => {
+    const title = req.body.title;
+    const description = req.body.description;
+      questionDB.createQuestion(title, description);
+      res.json({msg: 'Question has been saved!'})
   });
 
   return router;
