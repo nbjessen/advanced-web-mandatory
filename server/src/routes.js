@@ -20,5 +20,13 @@ module.exports = (questionDB) => {
       res.json({msg: 'Question has been saved!'})
   });
 
+  router.post('/answers', async (req, res) => {
+    const answer = req.body.answer;
+    const like = req.body.like;
+    const dislike = req.body.dislike;
+      questionDB.createAnswer(answer, like, dislike);
+      res.json({msg: 'Answer has been saved!'})
+  });
+
   return router;
 }

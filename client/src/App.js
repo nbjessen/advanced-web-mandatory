@@ -26,6 +26,7 @@ function App() {
     return question;
   }
 
+  //Posts question
   async function addQuestion(title, description) {
     console.log(title, description);
 
@@ -47,11 +48,35 @@ function App() {
     console.log(data);
   }
 
+  //Post answer
+  async function addAnswer(answer, like, dislike) {
+    console.log(answer);
+
+    const newAnswer = {
+      answer: answer,
+      like: like,
+      dislike: dislike
+    }   
+
+    const url = `${API_URL}/answers`;
+    const response = await fetch(url, {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newAnswer),
+    });
+    
+    const data = await response.json();
+    console.log(data);
+  }
+
+
   return (
     <>
       <Router>
         <Questions path="/" questions={data} addQuestion={addQuestion}/>
-        <Question path="/question/:id" getQuestion={getQuestion}/>
+        <Question path="/question/:id" getQuestion={getQuestion} addAnswer={addAnswer}/>
       </Router>
 
 

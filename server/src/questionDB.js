@@ -2,7 +2,7 @@ module.exports = (mongoose) => {
   const questionSchema = new mongoose.Schema({
     title: String,
     description: String,
-    answer: [[String, Number, Number]]
+    answers: [{answer: String, like: Number, dislike: Number}]
   });
 
   const questionModel = mongoose.model('question', questionSchema);
@@ -31,11 +31,22 @@ module.exports = (mongoose) => {
       return question.save();
   }
 
+  async function createAnswer(answer, like, dislike) {
+
+    //TODO DEN FÅR IKKE NOGET ID
+      let question = await getQuestion(id);
+      let newAnswer = {answers: [{answer: answer, like: like, dislike: dislike}]};
+
+      question.push(newAnswer);
+      question.save();
+      return question
+  }
 
   return {
   getQuestions,
   getQuestion,
-  createQuestion
+  createQuestion,
+  createAnswer
   }
 
 }
