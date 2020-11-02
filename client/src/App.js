@@ -21,6 +21,7 @@ function App() {
 
   //Gets question
   function getQuestion(id){
+
     console.log(data);
     const question = data.find(element => element._id === id);
     return question;
@@ -28,6 +29,7 @@ function App() {
 
   //Posts question
   async function addQuestion(title, description) {
+
     console.log(title, description);
 
     const newQuestion = {
@@ -48,18 +50,23 @@ function App() {
     console.log(data);
   }
 
+
+
   //Post answer
-  async function addAnswer(answer, like, dislike) {
+  async function addAnswer(answer) {
     console.log(answer);
 
+    //isolating question id from url
+    const url = window.location.href;
+    const info = url.split('/');
+    const id = info[info.length -1];
+
     const newAnswer = {
-      answer: answer,
-      like: like,
-      dislike: dislike
+      answer: answer
     }   
 
-    const url = `${API_URL}/answers`;
-    const response = await fetch(url, {
+    const newUrl = `${API_URL}/${id}/answers`;
+    const response = await fetch(newUrl, {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',

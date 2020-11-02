@@ -6,10 +6,12 @@ function Question(props) {
   const id = props.id;
   const question = props.getQuestion(id);
 
+  const answers = question.answers;
+  const answerStrings = [];
+  for(var i = 0; i < answers.length; i++){
+    answerStrings.push(<p>{"Answer: " + answers[i].answer + " Score: " + answers[i].score}</p>);
+  }
 
-
-
-  console.log(question)
 
   return (
     <>
@@ -17,7 +19,7 @@ function Question(props) {
       <p>{question.description}</p>
       <AddAnswer addAnswer={props.addAnswer}></AddAnswer>
       <h4>Comments:</h4>
-      <p>{question.answers}</p>
+     <div id="answers">{answerStrings}</div>
 
 
       <Link to="/">Back</Link>

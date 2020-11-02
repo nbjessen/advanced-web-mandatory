@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 
 function AddAnswer(props) {
     const [answer, setAnswer] = useState("");
-  
+    
+  //TODO get id from somewhere
     return (
       <>
         <h3>Add Comment</h3>

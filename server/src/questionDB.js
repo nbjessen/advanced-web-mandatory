@@ -2,7 +2,7 @@ module.exports = (mongoose) => {
   const questionSchema = new mongoose.Schema({
     title: String,
     description: String,
-    answers: [{answer: String, like: Number, dislike: Number}]
+    answers: [{answer: String, score: Number}]
   });
 
   const questionModel = mongoose.model('question', questionSchema);
@@ -31,13 +31,13 @@ module.exports = (mongoose) => {
       return question.save();
   }
 
-  async function createAnswer(answer, like, dislike) {
-
-    //TODO DEN FÅR IKKE NOGET ID
+  async function createAnswer(answer, id) {
+    
       let question = await getQuestion(id);
-      let newAnswer = {answers: [{answer: answer, like: like, dislike: dislike}]};
+      let newAnswer = {answer: answer, score: 0};
 
-      question.push(newAnswer);
+
+      question.answers.push(newAnswer);
       question.save();
       return question
   }
@@ -48,5 +48,4 @@ module.exports = (mongoose) => {
   createQuestion,
   createAnswer
   }
-
 }
