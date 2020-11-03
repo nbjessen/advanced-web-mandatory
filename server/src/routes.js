@@ -30,8 +30,8 @@ module.exports = (questionDB) => {
 
   router.post('/:id/score', async (req, res) => {
     const score = req.body.score;
-    const answerid = req.params.answerId;
-      questionDB.incrScore(score, answerid);
+    const answerId = req.params.answerId;
+      questionDB.incrScore(score, answerId);
       res.json({msg: 'Score has been saved!'})
   });
 

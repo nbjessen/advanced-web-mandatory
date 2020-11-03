@@ -47,8 +47,8 @@ module.exports = (mongoose) => {
       return question
   }
 
-  async function incrScore(score, id) {
-    let answer = await getAnswer(id);
+  async function incrScore(score, answerId) {
+    let answer = await getAnswer(answerId);
     let newAnswer = {score: score + 1};
     answer.answers.push(newAnswer);
     answer.save();
