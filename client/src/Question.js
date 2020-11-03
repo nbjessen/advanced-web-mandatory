@@ -16,7 +16,7 @@ function Question(props) {
   for(var i = 0; i < answers.length; i++){
     answerStrings.push(
       <p>
-        {"Answer: " + answers[i].answer + " Score: " + answers[i].score + "   "}
+        <b>Answer: </b> {answers[i].answer} <b> Score: </b> {answers[i].score + "   "}
         <button type="button" onClick={(event) => {setCount(answers.score + 1); props.addScore(count)}}>+</button>
         <button type="button" onClick={(event) => {setCount(answers.score - 1); props.addScore(count)}}>-</button>
       </p> );
@@ -28,7 +28,7 @@ function Question(props) {
       <h3>{question.title}</h3>
       <p>{question.description}</p>
       <AddAnswer addAnswer={props.addAnswer}></AddAnswer>
-      <h4>Comments:</h4>
+      <h4>Answers:</h4>
       <div id="answers">
         {answerStrings}
      </div>

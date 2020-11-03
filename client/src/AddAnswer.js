@@ -7,7 +7,7 @@ function AddAnswer(props) {
   //TODO get id from somewhere
     return (
       <>
-        <h3>Add Comment</h3>
+        <h3>Add Answer</h3>
   
         <input onChange={(event) => setAnswer(event.target.value)} type="text" placeholder="Comment" />
   
