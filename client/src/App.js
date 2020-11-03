@@ -53,7 +53,7 @@ function App() {
 
 
   //Post answer
-  async function addAnswer(answer) {
+  async function addAnswer(answerId, answer) {
     console.log(answer);
 
     //isolating question id from url
@@ -62,6 +62,7 @@ function App() {
     const id = info[info.length -1];
 
     const newAnswer = {
+      answerId: answerId,
       answer: answer
     }   
 
@@ -78,12 +79,35 @@ function App() {
     console.log(data);
   }
 
+  //Add to score
+  async function addScore(score){
+
+    const url = window.location.href;
+    const info = url.split('/');
+    const id = info[info.length -1];
+
+    const newScore = {
+      score: score
+    }
+
+    const newUrl = `${API_URL}/${id}/score`;
+    const response = await fetch(newUrl, {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newScore),
+    });
+    
+    const data = await response.json();
+    console.log(data);
+  }
 
   return (
     <>
       <Router>
         <Questions path="/" questions={data} addQuestion={addQuestion}/>
-        <Question path="/question/:id" getQuestion={getQuestion} addAnswer={addAnswer}/>
+        <Question path="/question/:id" getQuestion={getQuestion} addAnswer={addAnswer} addScore={addScore}/>
       </Router>
 
 

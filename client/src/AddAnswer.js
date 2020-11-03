@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 function AddAnswer(props) {
     const [answer, setAnswer] = useState("");
+    const answerId = Math.random();
     
   //TODO get id from somewhere
     return (
@@ -10,7 +11,7 @@ function AddAnswer(props) {
   
         <input onChange={(event) => setAnswer(event.target.value)} type="text" placeholder="Comment" />
   
-        <button type="button" onClick={(event) => props.addAnswer(answer)}>
+        <button type="button" onClick={(event) => props.addAnswer(answerId, answer)}>
           Submit
         </button>
         <br/>
