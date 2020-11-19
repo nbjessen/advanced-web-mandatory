@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 
-
 function AddQuestion(props) {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");

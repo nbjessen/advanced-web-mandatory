@@ -22,16 +22,15 @@ module.exports = (questionDB) => {
 
   router.post('/:id/answers', async (req, res) => {
     const answer = req.body.answer;
-    const answerId = req.body.answerId
     const id = req.params.id;
-      questionDB.createAnswer(answerId, answer, id);
+      await questionDB.createAnswer(answer, id);
       res.json({msg: 'Answer has been saved!'})
   });
 
-  router.post('/:id/score', async (req, res) => {
-    const score = req.body.score;
-    const answerId = req.params.answerId;
-      questionDB.incrScore(score, answerId);
+  router.post('/:id/answerScore', async (req, res) => {
+    const questionID = req.body.questionID;
+    const answerID = req.body.answerID;
+     await questionDB.answerScore(questionID, answerID);
       res.json({msg: 'Score has been saved!'})
   });
 

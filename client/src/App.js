@@ -6,7 +6,7 @@ const API_URL = process.env.REACT_APP_API;
 
 function App() {
   const [data, setData] = useState([]);
-  
+  const [postCount, setPostCount]=useState(0);
   //Fetching data from the server
   useEffect(() => {
     async function getData() {
@@ -16,7 +16,7 @@ function App() {
       setData(data);
     }
     getData();
-  }, []); 
+  }, [postCount]); 
 
 
   //Gets question
@@ -29,7 +29,7 @@ function App() {
 
   //Posts question
   async function addQuestion(title, description) {
-
+    setPostCount(postCount +1);
     console.log(title, description);
 
     const newQuestion = {
@@ -53,20 +53,20 @@ function App() {
 
 
   //Post answer
-  async function addAnswer(answerId, answer) {
+  async function addAnswer(id, answer) {
     console.log(answer);
-
+    setPostCount(postCount +1);
     //isolating question id from url
     const url = window.location.href;
     const info = url.split('/');
-    const id = info[info.length -1];
+    const urlId = info[info.length -1];
 
     const newAnswer = {
-      answerId: answerId,
+      id: id,
       answer: answer
     }   
 
-    const newUrl = `${API_URL}/${id}/answers`;
+    const newUrl = `${API_URL}/${urlId}/answers`;
     const response = await fetch(newUrl, {
       method: 'POST', // or 'PUT'
       headers: {
@@ -80,17 +80,18 @@ function App() {
   }
 
   //Add to score
-  async function addScore(score){
-
+  async function addScore(questionID, answerID){
+    setPostCount(postCount +1);
     const url = window.location.href;
     const info = url.split('/');
-    const id = info[info.length -1];
+    const urlId = info[info.length -1];
 
     const newScore = {
-      score: score
+      questionID: questionID,
+      answerID: answerID
     }
 
-    const newUrl = `${API_URL}/${id}/score`;
+    const newUrl = `${API_URL}/${urlId}/answerScore`;
     const response = await fetch(newUrl, {
       method: 'POST', // or 'PUT'
       headers: {

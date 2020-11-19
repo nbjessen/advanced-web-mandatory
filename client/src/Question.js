@@ -1,36 +1,33 @@
-import React, { useState } from 'react';
-import {Link} from "@reach/router";
+import React from 'react';
+import {Link, useParams} from "@reach/router";
 import AddAnswer from './AddAnswer';
 
 function Question(props) {
-  const [count, setCount] = useState(0);
 
-  
-
-
-  const id = props.id;
+  const params = useParams()
+  const id = params.id;
   const question = props.getQuestion(id);
 
-  const answers = question.answers;
-  const answerStrings = [];
-  for(var i = 0; i < answers.length; i++){
-    answerStrings.push(
-      <p>
-        <b>Answer: </b> {answers[i].answer} <b> Score: </b> {answers[i].score + "   "}
-        <button type="button" onClick={(event) => {setCount(answers.score + 1); props.addScore(count)}}>+</button>
-        <button type="button" onClick={(event) => {setCount(answers.score - 1); props.addScore(count)}}>-</button>
-      </p> );
-  }
+  if (question===undefined) return null 
+
+    const answerList= question.answers.map(e=> {return (
+        <>
+        <li key={e._id}><p>{e.answer}</p>
+        <button onClick={()=> props.addScore(id, e._id)}>Upvote</button> <p>Score: {e.score}</p>
+        </li>
+        </>
+        )
+    })
 
 
   return (
     <>
       <h3>{question.title}</h3>
       <p>{question.description}</p>
-      <AddAnswer addAnswer={props.addAnswer}></AddAnswer>
+      <AddAnswer id={id} addAnswer={props.addAnswer}></AddAnswer>
       <h4>Answers:</h4>
       <div id="answers">
-        {answerStrings}
+        {answerList}
      </div>
     
 
