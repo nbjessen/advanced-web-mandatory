@@ -2,16 +2,24 @@ import React, {useEffect, useState} from 'react';
 import {Router} from "@reach/router";
 import Questions from './Questions';
 import Question from './Question';
+import AuthService from "./AuthService";
+import Login from "./Login";
+
 const API_URL = process.env.REACT_APP_API;
+
+const authService = new AuthService(`${API_URL}/users/authenticate`);
+
+
 
 function App() {
   const [data, setData] = useState([]);
   const [postCount, setPostCount]=useState(0);
+  const [requestCount, setRequestCount] = useState(0);
   //Fetching data from the server
   useEffect(() => {
     async function getData() {
       const url = `${API_URL}/questions`;
-      const response = await fetch(url);
+      const response = await authService.fetch(url);
       const data = await response.json();
       setData(data);
     }
@@ -104,8 +112,22 @@ function App() {
     console.log(data);
   }
 
+  async function login(username, password) {
+    try {
+      const resp = await authService.login(username, password);
+      console.log("Authentication:", resp.msg);
+      setRequestCount(requestCount + 1);
+    } catch (e) {
+      console.log("Login", e);
+    }
+  } 
+
   return (
     <>
+
+      <Login login={login} />
+      {authService.loggedIn() ? <pre>User is logged in</pre> : <pre>User is not logged in</pre>}
+
       <Router>
         <Questions path="/" questions={data} addQuestion={addQuestion}/>
         <Question path="/question/:id" getQuestion={getQuestion} addAnswer={addAnswer} addScore={addScore}/>

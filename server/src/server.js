@@ -43,14 +43,14 @@ async function createServer() {
     // Open "/api/users/authenticate" for POST requests
     { url: "/api/users/authenticate", methods: ["POST"] },
   
-    // Open everything that doesn't begin with "/api"
+    // Open everything that doesn't begin with "/api" REGULAR EXPRESSION NÅR MAN SKAL HAVE ID TIL ET SPØRGSMÅL
     /^(?!\/api).*/gim,
   
     // Open all GET requests on the form "/api/questions/*" using a regular expression
     { url: /\/api\/questions\.*/gim, methods: ["GET"] }
   ];
 
-  // The secret value. Defaults to "the cake is a lie".
+  // The secret value. Defaults to "the cake is a lie" THE SALT.
   const secret = process.env.SECRET || "the cake is a lie";
 
   // Validate the user token using checkJwt middleware.
